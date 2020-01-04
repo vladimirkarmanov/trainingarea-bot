@@ -1,0 +1,14 @@
+**/.DS_Store
+.idea/
+.vscode/
+**/__pycache__
+**/.pytest_cache/
+*.log
+*.pickle
+*.pid
+*.out
+.ipynb_checkpoints
+venv/
+*.pyc
+pylintrc
+db/
