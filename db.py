@@ -16,9 +16,7 @@ class DbManager:
     def _row_to_dict(cls, row: Tuple, columns: List[str]) -> Dict:
         if row is not None:
             return {column: row[i] for i, column in enumerate(columns)}
-        return {
-            'error': 'Ошибка запроса, проверьте правильность введенных данных'
-        }
+        return {}
 
     @classmethod
     def _rows_to_list(cls, rows: List[tuple], columns: List[str]) -> List[dict]:

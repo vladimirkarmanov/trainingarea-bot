@@ -3,9 +3,8 @@ from aiogram import Dispatcher, executor
 from app import dp
 from views import (send_welcome, exercises_list,
                    cancel_handler, process_get_level,
-                   process_exercise_invalid, process_exercise,
-                   process_level_num_invalid, process_level_num,
-                   echo_message)
+                   process_exercise, process_level_num,
+                   unknown_command)
 
 
 async def shutdown(dispatcher: Dispatcher):
