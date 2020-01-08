@@ -1,12 +1,15 @@
+import logging
+
 from aiogram import types
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters import Text
 
+from app import dp
 from models.exercise import Exercise
 from models.level import Level
-from app import dp
 from states import LevelStates
-from utils.exceptions import NotCorrectMessage
+from utils import exceptions
+from utils.validator import Validator
 from utils.parser import Parser
 
 
@@ -34,7 +37,7 @@ async def cancel_handler(message: types.Message, state: FSMContext):
         return
     logging.info(f'Cancelling state {current_state}')
     await state.finish()
-    await message.answer('Отмена')
+    await message.answer('Отмена операции')
 
 
 @dp.message_handler(commands=['level'])
@@ -44,28 +47,27 @@ async def process_get_level(message: types.Message, state: FSMContext):
                          'которого вы хотите посмотреть уровень')
 
 
-@dp.message_handler(lambda message: not message.text.strip().isalpha(),
-                    state=LevelStates.exercise)
-async def process_exercise_invalid(message: types.Message):
-    return await message.answer('Неверное название упражнения!')
-
-
 @dp.message_handler(state=LevelStates.exercise)
 async def process_exercise(message: types.Message, state: FSMContext):
+    try:
+        Validator.validate_exercise(message.text)
+    except exceptions.NotCorrectMessage as e:
+        logging.info(f'Raised "{str(e)}". Received msg: {message.text}')
+        return await message.answer(str(e))
+
     await LevelStates.next()
     await state.update_data(exercise_name=message.text)
     await message.answer('Введите номер уровня - число от 1 до 10')
 
 
-@dp.message_handler(lambda message: not message.text.strip().isdigit() or
-                    int(message.text.strip()) not in tuple(range(1, 11)),
-                    state=LevelStates.level_num)
-async def process_level_num_invalid(message: types.Message):
-    return await message.answer('Номер уровня должен быть числом от 1 до 10')
-
-
 @dp.message_handler(state=LevelStates.level_num)
 async def process_level_num(message: types.Message, state: FSMContext):
+    try:
+        Validator.validate_level(message.text)
+    except exceptions.NotCorrectMessage as e:
+        logging.info(f'Raised "{str(e)}". Received msg: {message.text}')
+        return await message.answer(str(e))
+
     await LevelStates.next()
     await state.update_data(level_num=message.text)
     async with state.proxy() as data:
@@ -77,5 +79,5 @@ async def process_level_num(message: types.Message, state: FSMContext):
 
 
 @dp.message_handler()
-async def echo_message(message: types.Message):
-    await message.answer('Попробуй набрать эту команду - /help')
+async def unknown_command(message: types.Message):
+    await message.answer('Попробуй эту команду - /help')
