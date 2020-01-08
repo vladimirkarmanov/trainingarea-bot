@@ -8,7 +8,10 @@ from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from config import Config
 from middlewares import AccessMiddleware
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(
+    level=logging.INFO,
+    format='[%(asctime)s] [%(levelname)s]    %(message)s'
+)
 
 PROXY_AUTH = aiohttp.BasicAuth(
     login=Config.TELEGRAM_PROXY_LOGIN,
