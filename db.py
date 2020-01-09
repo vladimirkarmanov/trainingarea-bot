@@ -19,8 +19,28 @@ class DbManager:
         return {}
 
     @classmethod
-    def _rows_to_list(cls, rows: List[tuple], columns: List[str]) -> List[dict]:
+    def _rows_to_list(cls,
+                      rows: List[tuple],
+                      columns: List[str]) -> List[dict]:
         return [cls._row_to_dict(row, columns) for row in rows]
+
+    @classmethod
+    def first(cls) -> Dict:
+        cursor.execute(
+            f'SELECT * FROM {cls._tablename} '
+            f'ORDER BY {cls._columns[0]} LIMIT 1'
+        )
+        row = cursor.fetchone()
+        return cls._row_to_dict(row, cls._columns)
+
+    @classmethod
+    def last(cls) -> Dict:
+        cursor.execute(
+            f'SELECT * FROM {cls._tablename} '
+            f'ORDER BY {cls._columns[0]} DESC LIMIT 1'
+        )
+        row = cursor.fetchone()
+        return cls._row_to_dict(row, cls._columns)
 
     @classmethod
     def get(cls, field: str, value: any) -> Dict:
