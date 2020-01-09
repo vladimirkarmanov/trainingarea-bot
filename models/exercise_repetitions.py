@@ -10,7 +10,7 @@ class ExerciseRepetitions(DbManager):
                                  pk_training: int,
                                  pk_exercise: str,
                                  pk_level: str,
-                                 repetitions: str):
+                                 repetitions: str) -> None:
         cls.insert(
             {'pk_training': pk_training,
              'pk_exercise': pk_exercise,

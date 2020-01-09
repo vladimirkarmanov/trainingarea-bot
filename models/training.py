@@ -6,5 +6,5 @@ class Training(DbManager):
     _columns = ['id', 'date']
 
     @classmethod
-    def add_training(cls, date: str):
+    def add_training(cls, date: str) -> None:
         cls.insert({'date': date})
