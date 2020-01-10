@@ -39,8 +39,8 @@ class Validator:
                 if not rep.isdigit():
                     raise NotCorrectMessage('Повторы должны быть числами')
         except ValueError:
-            raise NotCorrectMessage('Необходим данный формат\n'
-                                    'упражнение1 - 15 20 10 12\n'
-                                    'упражнение2 - 50 55 48')
+            raise NotCorrectMessage('Необходим данный формат:\n'
+                                    'упражнение1(7 уровень) - 15 20 10 12\n'
+                                    'упражнение2(4 уровень) - 50 55 48')
         else:
             return repetitions
