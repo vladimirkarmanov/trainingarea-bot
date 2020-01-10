@@ -150,8 +150,17 @@ async def process_exercise_repetitions(message: types.Message,
 
 @dp.message_handler(commands=['training'])
 async def process_add_training(message: types.Message):
-    logging.info(f'Received command {message.get_command()}')
-    await message.answer('Введите дату тренировки в формате YYYY-MM-DD')
+    command, received_date = message.get_full_command()
+    logging.info(f'Received: command={command}, date={received_date}')
+    try:
+        date = Validator.clean_date(received_date)
+    except exceptions.NotCorrectMessage as e:
+        logging.error(f'Raised "{str(e)}". Received msg: {message.text}')
+        return await message.answer(str(e))
+
+    training = Training.get(field='date', value=date)
+    answer_message = Training.get_formatted_training(training)
+    await message.answer(answer_message, parse_mode='HTML')
 
 
 @dp.message_handler()
