@@ -1,7 +1,6 @@
-from typing import Dict, List, NamedTuple
+from typing import Dict
 
 from db import DbManager, get_cursor
-from app import logging
 
 
 class Level(DbManager):
