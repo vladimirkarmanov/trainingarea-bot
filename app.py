@@ -9,7 +9,8 @@ from middlewares import AccessMiddleware
 
 logging.basicConfig(
     level=logging.INFO,
-    format='[%(asctime)s] [%(levelname)s]    %(message)s'
+    format='[%(asctime)s] [%(levelname)s]   %(message)s',
+    filename='log_bot.log'
 )
 
 PROXY_AUTH = aiohttp.BasicAuth(
