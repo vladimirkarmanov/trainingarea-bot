@@ -17,6 +17,12 @@ CREATE TABLE level(
     FOREIGN KEY(pk_exercise) REFERENCES exercise(name)
 );
 
+CREATE TABLE photo(
+    filepath VARCHAR(255) PRIMARY KEY,
+    pk_level VARCHAR(255) NOT NULL,
+    FOREIGN KEY(pk_level) REFERENCES level(name)
+);
+
 CREATE TABLE exercise_repetitions(
     id INTEGER PRIMARY KEY,
     pk_training INTEGER NOT NULL,
@@ -28,8 +34,8 @@ CREATE TABLE exercise_repetitions(
     FOREIGN KEY(pk_level) REFERENCES level(name)
 );
 
-insert into exercise (name)
-values
+INSERT INTO exercise(name)
+VALUES
 ('отжимания'),
 ('подтягивания'),
 ('приседания'),
@@ -37,8 +43,8 @@ values
 ('стойка'),
 ('мостик');
 
-insert into level (name, description, easy, middle, pro, pk_exercise)
-values
+INSERT INTO level(name, description, easy, middle, pro, pk_exercise)
+VALUES
 ('уровень 1: отжимания от стены',
  'Встаньте лицом к стене. Держите ноги сомкнутыми, упритесь ладонями в стену. Это начальная позиция. Ваши руки должны быть выпрямлены и находиться на ширине плеч, на уровне груди. Сгибайте плечи и локти до тех пор, пока не коснётесь лбом стены. Это конечная позиция. Отожмитесь от стены в начальную позицию и повторите.',
  '1x10',
@@ -458,3 +464,109 @@ values
  '2x2',
  '2x5',
  'стойка');
+
+INSERT INTO photo(filepath, pk_level)
+VALUES
+('/usr/trainingarea/media/push-ups/1_level1.png', 'уровень 1: отжимания от стены'),
+('/usr/trainingarea/media/push-ups/2_level1.png', 'уровень 1: отжимания от стены'),
+('/usr/trainingarea/media/push-ups/1_level2.png', 'уровень 2: отжимания в наклоне'),
+('/usr/trainingarea/media/push-ups/2_level2.png', 'уровень 2: отжимания в наклоне'),
+('/usr/trainingarea/media/push-ups/1_level3.png', 'уровень 3: отжимания на коленях'),
+('/usr/trainingarea/media/push-ups/2_level3.png', 'уровень 3: отжимания на коленях'),
+('/usr/trainingarea/media/push-ups/1_level4.png', 'уровень 4: неполные отжимания'),
+('/usr/trainingarea/media/push-ups/2_level4.png', 'уровень 4: неполные отжимания'),
+('/usr/trainingarea/media/push-ups/1_level5.png', 'уровень 5: полные отжимания'),
+('/usr/trainingarea/media/push-ups/2_level5.png', 'уровень 5: полные отжимания'),
+('/usr/trainingarea/media/push-ups/1_level6.png', 'уровень 6: узкие отжимания'),
+('/usr/trainingarea/media/push-ups/2_level6.png', 'уровень 6: узкие отжимания'),
+('/usr/trainingarea/media/push-ups/1_level7.png', 'уровень 7: разновысокие отжимания'),
+('/usr/trainingarea/media/push-ups/2_level7.png', 'уровень 7: разновысокие отжимания'),
+('/usr/trainingarea/media/push-ups/1_level8.png', 'уровень 8: неполные отжимания на одной руке'),
+('/usr/trainingarea/media/push-ups/2_level8.png', 'уровень 8: неполные отжимания на одной руке'),
+('/usr/trainingarea/media/push-ups/1_level9.png', 'уровень 9: отжимания на одной руке с поддержкой'),
+('/usr/trainingarea/media/push-ups/2_level9.png', 'уровень 9: отжимания на одной руке с поддержкой'),
+('/usr/trainingarea/media/push-ups/1_level10.png', 'уровень 10: отжимания на одной руке'),
+('/usr/trainingarea/media/push-ups/2_level10.png', 'уровень 10: отжимания на одной руке'),
+
+
+('/usr/trainingarea/media/squats/1_level1.png', 'уровень 1: приседания в стойке на плечах'),
+('/usr/trainingarea/media/squats/2_level1.png', 'уровень 1: приседания в стойке на плечах'),
+('/usr/trainingarea/media/squats/1_level2.png', 'уровень 2: приседания "Складной нож"'),
+('/usr/trainingarea/media/squats/2_level2.png', 'уровень 2: приседания "Складной нож"'),
+('/usr/trainingarea/media/squats/1_level3.png', 'уровень 3: приседания с поддержкой'),
+('/usr/trainingarea/media/squats/2_level3.png', 'уровень 3: приседания с поддержкой'),
+('/usr/trainingarea/media/squats/1_level4.png', 'уровень 4: неполные приседания'),
+('/usr/trainingarea/media/squats/2_level4.png', 'уровень 4: неполные приседания'),
+('/usr/trainingarea/media/squats/1_level5.png', 'уровень 5: полные приседания'),
+('/usr/trainingarea/media/squats/2_level5.png', 'уровень 5: полные приседания'),
+('/usr/trainingarea/media/squats/1_level6.png', 'уровень 6: узкие приседания'),
+('/usr/trainingarea/media/squats/2_level6.png', 'уровень 6: узкие приседания'),
+('/usr/trainingarea/media/squats/1_level7.png', 'уровень 7: разновысокие приседания'),
+('/usr/trainingarea/media/squats/2_level7.png', 'уровень 7: разновысокие приседания'),
+('/usr/trainingarea/media/squats/1_level8.png', 'уровень 8: неполные приседания на одной ноге'),
+('/usr/trainingarea/media/squats/2_level8.png', 'уровень 8: неполные приседания на одной ноге'),
+('/usr/trainingarea/media/squats/1_level9.png', 'уровень 9: приседания на одной ноге с поддержкой'),
+('/usr/trainingarea/media/squats/2_level9.png', 'уровень 9: приседания на одной ноге с поддержкой'),
+('/usr/trainingarea/media/squats/1_level10.png', 'уровень 10: приседания на одной ноге'),
+('/usr/trainingarea/media/squats/2_level10.png', 'уровень 10: приседания на одной ноге'),
+
+
+('/usr/trainingarea/media/pull-ups/1_level1.png', 'уровень 1: вертикальные подтягивания'),
+('/usr/trainingarea/media/pull-ups/1_level2.png', 'уровень 2: горизонтальные подтягивания'),
+('/usr/trainingarea/media/pull-ups/1_level3.png', 'уровень 3: подтягивания "Складной нож"'),
+('/usr/trainingarea/media/pull-ups/1_level4.png', 'уровень 4: неполные подтягивания'),
+('/usr/trainingarea/media/pull-ups/1_level5.png', 'уровень 5: полные подтягивания'),
+('/usr/trainingarea/media/pull-ups/2_level5.png', 'уровень 5: полные подтягивания'),
+('/usr/trainingarea/media/pull-ups/1_level6.png', 'уровень 6: узкие подтягивания'),
+('/usr/trainingarea/media/pull-ups/1_level7.png', 'уровень 7: разновысокие подтягивания'),
+('/usr/trainingarea/media/pull-ups/1_level8.png', 'уровень 8: неполные подтягивания на одной руке'),
+('/usr/trainingarea/media/pull-ups/2_level8.png', 'уровень 8: неполные подтягивания на одной руке'),
+('/usr/trainingarea/media/pull-ups/1_level9.png', 'уровень 9: подтягивания на одной руке с поддержкой'),
+('/usr/trainingarea/media/pull-ups/2_level10.png', 'уровень 10: подтягивания на одной руке'),
+
+
+('/usr/trainingarea/media/press/1_level1.png', 'уровень 1: подтягивание коленей к груди'),
+('/usr/trainingarea/media/press/2_level1.png', 'уровень 1: подтягивание коленей к груди'),
+('/usr/trainingarea/media/press/1_level2.png', 'уровень 2: подъемы коленей из положения лежа'),
+('/usr/trainingarea/media/press/2_level2.png', 'уровень 2: подъемы коленей из положения лежа'),
+('/usr/trainingarea/media/press/1_level3.png', 'уровень 3: подъемы согнутых ног из положения лежа'),
+('/usr/trainingarea/media/press/2_level3.png', 'уровень 3: подъемы согнутых ног из положения лежа'),
+('/usr/trainingarea/media/press/1_level4.png', 'уровень 4: подъемы ног "Лягушка"'),
+('/usr/trainingarea/media/press/2_level4.png', 'уровень 4: подъемы ног "Лягушка"'),
+('/usr/trainingarea/media/press/3_level4.png', 'уровень 4: подъемы ног "Лягушка"'),
+('/usr/trainingarea/media/press/1_level5.png', 'уровень 5: подъемы прямых ног из положения лежа'),
+('/usr/trainingarea/media/press/2_level5.png', 'уровень 5: подъемы прямых ног из положения лежа'),
+('/usr/trainingarea/media/press/1_level6.png', 'уровень 6: подтягивание коленей в висе'),
+('/usr/trainingarea/media/press/2_level6.png', 'уровень 6: подтягивание коленей в висе'),
+('/usr/trainingarea/media/press/1_level7.png', 'уровень 7: подъемы согнутых ног в висе'),
+('/usr/trainingarea/media/press/2_level7.png', 'уровень 7: подъемы согнутых ног в висе'),
+('/usr/trainingarea/media/press/1_level8.png', 'уровень 8: подъемы ног в висе - "Лягушка"'),
+('/usr/trainingarea/media/press/1_level9.png', 'уровень 9: неполные подъемы прямых ног в висе'),
+('/usr/trainingarea/media/press/1_level10.png', 'уровень 10: подъемы прямых ног в висе'),
+('/usr/trainingarea/media/press/2_level10.png', 'уровень 10: подъемы прямых ног в висе'),
+
+
+('/usr/trainingarea/media/bridge/1_level1.png', 'уровень 1: мостик от плеч'),
+('/usr/trainingarea/media/bridge/1_level2.png', 'уровень 2: прямой мостик'),
+('/usr/trainingarea/media/bridge/1_level3.png', 'уровень 3: мостик из обратного наклона'),
+('/usr/trainingarea/media/bridge/1_level4.png', 'уровень 4: мостик из упора на голову'),
+('/usr/trainingarea/media/bridge/1_level5.png', 'уровень 5: полумостик'),
+('/usr/trainingarea/media/bridge/1_level6.png', 'уровень 6: полный мостик'),
+('/usr/trainingarea/media/bridge/1_level7.png', 'уровень 7: мостик по стенке вниз'),
+('/usr/trainingarea/media/bridge/1_level8.png', 'уровень 8: мостик по стенке вверх'),
+('/usr/trainingarea/media/bridge/1_level9.png', 'уровень 9: неполный мостик из положения стоя'),
+('/usr/trainingarea/media/bridge/1_level10.png', 'уровень 10: полный мостик из положения стоя'),
+
+
+('/usr/trainingarea/media/handstand/1_level1.png', 'уровень 1: стойка на голове у стены'),
+('/usr/trainingarea/media/handstand/2_level1.png', 'уровень 1: стойка на голове у стены'),
+('/usr/trainingarea/media/handstand/1_level2.png', 'уровень 2: стойка "Ворон"'),
+('/usr/trainingarea/media/handstand/2_level2.png', 'уровень 2: стойка "Ворон"'),
+('/usr/trainingarea/media/handstand/1_level3.png', 'уровень 3: стойка на руках у стены'),
+('/usr/trainingarea/media/handstand/1_level4.png', 'уровень 4: неполные отжимания в стойке на руках у стены'),
+('/usr/trainingarea/media/handstand/1_level5.png', 'уровень 5: отжимания в стойке на руках у стены'),
+('/usr/trainingarea/media/handstand/1_level6.png', 'уровень 6: узкие отжимания в стойке на руках у стены'),
+('/usr/trainingarea/media/handstand/1_level7.png', 'уровень 7: разновысокие отжимания в стойке на руках у стены'),
+('/usr/trainingarea/media/handstand/1_level8.png', 'уровень 8: неполные отжимания в стойке на одной руке'),
+('/usr/trainingarea/media/handstand/1_level9.png', 'уровень 9: отжимания в стойке на одной руке с поддержкой'),
+('/usr/trainingarea/media/handstand/1_level10.png', 'уровень 10: отжимания в стойке на одной руке');
