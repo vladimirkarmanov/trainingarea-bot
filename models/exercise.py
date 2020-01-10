@@ -1,9 +1,6 @@
-from typing import Dict, List
-
-from db import DbManager, get_cursor
+from db import DbManager
 
 
 class Exercise(DbManager):
     _tablename = 'exercise'
     _columns = ['name']
-    

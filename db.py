@@ -1,6 +1,6 @@
 import os
 import sqlite3
-from typing import Dict, List, Tuple, Any
+from typing import Dict, List, Tuple
 
 from config import BASE_DIR
 
