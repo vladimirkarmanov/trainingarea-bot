@@ -8,7 +8,7 @@ class Parser:
     def obj_to_string(cls, obj: Dict) -> str:
         result = ''
         for val in obj.values():
-            result += '\n' + val
+            result += '\n' + str(val)
         return result
 
     @classmethod
