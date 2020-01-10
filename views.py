@@ -3,11 +3,13 @@ import logging
 from aiogram import types
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters import Text
+import aiofiles
 
 from app import dp
 from models.exercise import Exercise
 from models.exercise_repetitions import ExerciseRepetitions
 from models.level import Level
+from models.photo import Photo
 from models.training import Training
 from states import LevelStates, TrainingStates
 from utils import exceptions
@@ -73,8 +75,12 @@ async def process_level_num(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         level = Level.level_for_exercise(exercise_name=data['exercise_name'],
                                          level_num=level_num)
-        answer_message = Level.get_formatted_level(level)
-        await message.answer(answer_message, parse_mode='HTML')
+        photos = Photo.get_photos_for_level(level.get('name'))
+        caption = Level.get_formatted_level(level)
+        await message.answer(caption, parse_mode='HTML')
+        for photo in photos:
+            async with aiofiles.open(photo, 'rb') as p:
+                await message.answer_photo(p)
     await state.finish()
 
 
