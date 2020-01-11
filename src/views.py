@@ -22,8 +22,13 @@ async def send_welcome(message: types.Message):
     logging.info(f'Received command {message.get_command()}')
     await message.answer(
         'Бот для программы тренировок "Тренировочная зона"\n\n'
-        'Показать упражнения: /exercises\n'
-        'Показать уровень для упражнения: /level'
+        '/exercises - показать упражнения\n'
+        '/level - показать уровень для упражнения\n'
+        '/add - добавить тренировку\n'
+        '/training дата - показать тренировку по дате\n'
+        '/trainings - все тренировки\n'
+        '/trainings дата_начала дата_конца - показать тренировки за период\n'
+        '/cancel - отмена операции\n'
     )
 
 
