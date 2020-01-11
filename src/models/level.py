@@ -16,7 +16,7 @@ class Level(DbManager):
         )
         row = cursor.fetchone()
         columns = ['name', 'description', 'easy', 'middle', 'pro']
-        return cls._row_to_dict(row, columns)
+        return cls.row_to_dict(row, columns)
 
     @classmethod
     def get_formatted_level(cls, obj: Dict) -> str:

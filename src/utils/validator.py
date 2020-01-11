@@ -35,7 +35,7 @@ class Validator:
     @classmethod
     def clean_repetitions(cls, repetitions: str) -> str:
         try:
-            for rep in repetitions.split(' '):
+            for rep in repetitions.split():
                 if not rep.isdigit():
                     raise NotCorrectMessage('Повторы должны быть числами')
         except ValueError:

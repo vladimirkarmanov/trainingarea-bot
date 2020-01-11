@@ -165,7 +165,20 @@ async def training_by_date(message: types.Message):
 @dp.message_handler(commands=['trainings'])
 async def trainings_list(message: types.Message):
     logging.info(f'Received command {message.get_command()}')
-    trainings = Training.all()
+    if len(message.get_full_command()[-1]) > 1:
+        command, dates = message.get_full_command()
+        start_date, end_date = dates.split()
+        logging.info(f'Received start_date {start_date}, end_date {end_date}')
+        try:
+            start_date = Validator.clean_date(start_date)
+            end_date = Validator.clean_date(end_date)
+        except exceptions.NotCorrectMessage as e:
+            logging.error(f'Raised "{str(e)}". Received msg: {message.text}')
+            return await message.answer(str(e))
+        trainings = Training.get_trainings_for_period(start_date, end_date)
+    else:
+        trainings = Training.all()
+
     result_trainings = []
     for training in trainings:
         result_trainings.append(Training.get_formatted_training(training))

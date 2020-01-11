@@ -13,16 +13,16 @@ class DbManager:
     _columns = None
 
     @classmethod
-    def _row_to_dict(cls, row: Tuple, columns: List[str]) -> Dict:
+    def row_to_dict(cls, row: Tuple, columns: List[str]) -> Dict:
         if row is not None:
             return {column: row[i] for i, column in enumerate(columns)}
         return {}
 
     @classmethod
-    def _rows_to_list(cls,
+    def rows_to_list(cls,
                       rows: List[tuple],
                       columns: List[str]) -> List[dict]:
-        return [cls._row_to_dict(row, columns) for row in rows]
+        return [cls.row_to_dict(row, columns) for row in rows]
 
     @classmethod
     def first(cls) -> Dict:
@@ -31,7 +31,7 @@ class DbManager:
             f'ORDER BY {cls._columns[0]} LIMIT 1'
         )
         row = cursor.fetchone()
-        return cls._row_to_dict(row, cls._columns)
+        return cls.row_to_dict(row, cls._columns)
 
     @classmethod
     def last(cls) -> Dict:
@@ -40,7 +40,7 @@ class DbManager:
             f'ORDER BY {cls._columns[0]} DESC LIMIT 1'
         )
         row = cursor.fetchone()
-        return cls._row_to_dict(row, cls._columns)
+        return cls.row_to_dict(row, cls._columns)
 
     @classmethod
     def get(cls, field: str, value: any) -> Dict:
@@ -48,7 +48,7 @@ class DbManager:
             f'SELECT * FROM {cls._tablename} WHERE {field}="{value}"'
         )
         row = cursor.fetchone()
-        return cls._row_to_dict(row, cls._columns)
+        return cls.row_to_dict(row, cls._columns)
 
     @classmethod
     def all(cls) -> List[dict]:
@@ -56,7 +56,7 @@ class DbManager:
             f'SELECT * FROM {cls._tablename}'
         )
         rows = cursor.fetchall()
-        return cls._rows_to_list(rows, cls._columns)
+        return cls.rows_to_list(rows, cls._columns)
 
     @classmethod
     def filter(cls, field: str, value: any) -> List[dict]:
@@ -64,7 +64,7 @@ class DbManager:
             f'SELECT * from {cls._tablename} WHERE {field}="{value}"'
         )
         rows = cursor.fetchall()
-        return cls._rows_to_list(rows, cls._columns)
+        return cls.rows_to_list(rows, cls._columns)
 
     @classmethod
     def insert(cls, column_values: Dict) -> None:
