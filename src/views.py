@@ -1,9 +1,9 @@
 import logging
 
+import aiofiles
 from aiogram import types
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters import Text
-import aiofiles
 
 from app import dp
 from models.exercise import Exercise
