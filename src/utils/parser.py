@@ -25,8 +25,8 @@ class Parser:
             result = []
             for item in temp_lst:
                 exercise_level, repetitions = item.split('-')
-                exercise = exercise_level.split('(')[0]
-                level = exercise_level.split('(')[1][0]
+                exercise = exercise_level.split('(')[0].lower()
+                level = exercise_level.split('(')[1][0].lower()
                 result.append(
                     (exercise.strip(), level.strip(), repetitions.strip())
                 )

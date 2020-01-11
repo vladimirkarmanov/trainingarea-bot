@@ -29,10 +29,9 @@ async def send_welcome(message: types.Message):
 
 @dp.message_handler(commands=['exercises'])
 async def exercises_list(message: types.Message):
+    logging.info(f'Received command {message.get_command()}')
     exercises = Exercise.all()
     answer_message = Parser.list_objs_to_string(exercises)
-    logging.info(f'Received command {message.get_command()},'
-                 f' sending {answer_message}')
     await message.answer(answer_message)
 
 
@@ -135,10 +134,10 @@ async def process_exercise_repetitions(message: types.Message,
         return await message.answer(str(e))
 
     async with state.proxy() as data:
-        Training.add_training(data['date'])
-        pk_training = Training.last()['id']
+        Training.add_training(data.get('date'))
+        pk_training = Training.last().get('id')
         for exercise, level, repetitions in exercises_repetitions:
-            pk_level = Level.level_for_exercise(exercise, level)['name']
+            pk_level = Level.level_for_exercise(exercise, level).get('name')
             ExerciseRepetitions.add_exercise_repetitions(int(pk_training),
                                                          exercise,
                                                          pk_level,
@@ -149,7 +148,7 @@ async def process_exercise_repetitions(message: types.Message,
 
 
 @dp.message_handler(commands=['training'])
-async def process_add_training(message: types.Message):
+async def training_by_date(message: types.Message):
     command, received_date = message.get_full_command()
     logging.info(f'Received: command={command}, date={received_date}')
     try:
@@ -161,6 +160,16 @@ async def process_add_training(message: types.Message):
     training = Training.get(field='date', value=date)
     answer_message = Training.get_formatted_training(training)
     await message.answer(answer_message, parse_mode='HTML')
+
+
+@dp.message_handler(commands=['trainings'])
+async def trainings_list(message: types.Message):
+    logging.info(f'Received command {message.get_command()}')
+    trainings = Training.all()
+    result_trainings = []
+    for training in trainings:
+        result_trainings.append(Training.get_formatted_training(training))
+    await message.answer(''.join(result_trainings), parse_mode='HTML')
 
 
 @dp.message_handler()

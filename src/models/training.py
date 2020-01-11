@@ -22,11 +22,11 @@ class Training(DbManager):
         for ex in exercise_repetitions:
             exercise = Exercise.get(field='name', value=ex['pk_exercise'])
             level = Level.get(field='name', value=ex['pk_level'])
-            s = f"{exercise['name']}({level['name']}):\n" \
-                f"<ins>{ex['repetitions']}</ins>\n"
+            s = f"{exercise.get('name')}({level.get('name')}):\n" \
+                f"{ex.get('repetitions')}\n"
             temp.append(s)
 
-        result = f"<b>{obj['date']}</b>\n"
+        result = f"<b>[{obj['date']}]</b>\n"
         for t in temp:
             result += t
-        return result
+        return result + '\n'

@@ -2,9 +2,9 @@ import os
 import sqlite3
 from typing import Dict, List, Tuple
 
-from config import BASE_DIR
+from config import ROOT_DIR
 
-conn = sqlite3.connect('training.db')
+conn = sqlite3.connect(os.path.join(ROOT_DIR, 'db', 'training.db'))
 cursor = conn.cursor()
 
 
@@ -90,7 +90,7 @@ def get_cursor():
 
 
 def _init_db():
-    with open(os.path.join(BASE_DIR, 'createdb.sql'), 'r') as f:
+    with open(os.path.join(ROOT_DIR, 'db', 'createdb.sql'), 'r') as f:
         sql = f.read()
     cursor.executescript(sql)
     conn.commit()
