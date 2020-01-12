@@ -187,7 +187,12 @@ async def trainings_list(message: types.Message):
     result_trainings = []
     for training in trainings:
         result_trainings.append(Training.get_formatted_training(training))
-    await message.answer(''.join(result_trainings), parse_mode='HTML')
+    
+    if len(result_trainings) > 0:
+        answer_message = ''.join(result_trainings)
+    else:
+        answer_message = 'Список тренировок пуст'
+    await message.answer(answer_message, parse_mode='HTML')
 
 
 @dp.message_handler()
