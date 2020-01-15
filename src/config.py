@@ -6,6 +6,7 @@ load_dotenv()
 
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 APP_DIR = os.path.dirname(os.path.abspath(__file__))
+DB_ROOT = os.path.join(ROOT_DIR, 'db')
 MEDIA_ROOT = os.path.join(ROOT_DIR, 'media')
 
 

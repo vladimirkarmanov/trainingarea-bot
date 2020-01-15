@@ -2,9 +2,9 @@ import os
 import sqlite3
 from typing import Dict, List, Tuple
 
-from config import ROOT_DIR
+from config import ROOT_DIR, DB_ROOT
 
-conn = sqlite3.connect(os.path.join(ROOT_DIR, 'db', 'training.db'))
+conn = sqlite3.connect(os.path.join(DB_ROOT, 'training.db'))
 cursor = conn.cursor()
 
 
@@ -20,8 +20,8 @@ class DbManager:
 
     @classmethod
     def rows_to_list(cls,
-                      rows: List[tuple],
-                      columns: List[str]) -> List[dict]:
+                     rows: List[tuple],
+                     columns: List[str]) -> List[dict]:
         return [cls.row_to_dict(row, columns) for row in rows]
 
     @classmethod

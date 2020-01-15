@@ -1,8 +1,3 @@
-CREATE TABLE training(
-    id INTEGER PRIMARY KEY,
-    date DATE NOT NULL
-);
-
 CREATE TABLE exercise(
     name VARCHAR(255) PRIMARY KEY
 );
@@ -20,17 +15,6 @@ CREATE TABLE level(
 CREATE TABLE photo(
     filepath VARCHAR(255) PRIMARY KEY,
     pk_level VARCHAR(255) NOT NULL,
-    FOREIGN KEY(pk_level) REFERENCES level(name)
-);
-
-CREATE TABLE exercise_repetitions(
-    id INTEGER PRIMARY KEY,
-    pk_training INTEGER NOT NULL,
-    pk_exercise VARCHAR(255) NOT NULL,
-    pk_level VARCHAR(255) NOT NULL,
-    repetitions VARCHAR(50) NOT NULL,
-    FOREIGN KEY(pk_training) REFERENCES training(id),
-    FOREIGN KEY(pk_exercise) REFERENCES exercise(name),
     FOREIGN KEY(pk_level) REFERENCES level(name)
 );
 
