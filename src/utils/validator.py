@@ -1,5 +1,3 @@
-from datetime import datetime
-
 from models.exercise import Exercise
 from utils.exceptions import NotCorrectMessage
 
@@ -21,26 +19,3 @@ class Validator:
                 'Номер уровня должен быть числом от 1 до 10'
             )
         return level
-
-    @classmethod
-    def clean_date(cls, raw_message: str) -> str:
-        try:
-            date = raw_message.strip()
-            datetime.strptime(date, '%Y-%m-%d')
-        except ValueError:
-            raise NotCorrectMessage('Дата должна быть в формате YYYY-MM-DD')
-        else:
-            return date
-
-    @classmethod
-    def clean_repetitions(cls, repetitions: str) -> str:
-        try:
-            for rep in repetitions.split():
-                if not rep.isdigit():
-                    raise NotCorrectMessage('Повторы должны быть числами')
-        except ValueError:
-            raise NotCorrectMessage('Необходим данный формат:\n'
-                                    'упражнение1(7 уровень) - 15 20 10 12\n'
-                                    'упражнение2(4 уровень) - 50 55 48')
-        else:
-            return repetitions
