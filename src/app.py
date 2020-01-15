@@ -5,7 +5,6 @@ from aiogram import Bot, Dispatcher
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 
 from config import Config
-from middlewares import AccessMiddleware
 
 if Config.DEBUG:
     logging.basicConfig(level=logging.INFO,
@@ -23,4 +22,3 @@ else:
     bot = Bot(token=Config.TELEGRAM_API_TOKEN)
 
 dp = Dispatcher(bot, storage=MemoryStorage())
-dp.middleware.setup(AccessMiddleware(Config.TELEGRAM_ACCESS_ID))
